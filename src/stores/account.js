@@ -15,6 +15,8 @@ export const useAccountStore = defineStore("account", () => {
     const logout = () => {
         state.signedUser = null;
         state.isSigned = false
+
+      
     }
 
     return { state, setSigendUser, logout };

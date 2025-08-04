@@ -1,7 +1,9 @@
 <script setup>
 import { useAccountStore } from '@/stores/account';
 import { logout } from '@/services/accountService';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const account = useAccountStore();
 //로그아웃
 const logoutAccount = async () => {
@@ -13,6 +15,7 @@ const logoutAccount = async () => {
     return;
   }
   account.logout();
+  await router.push('/');
 };
 </script>
 
