@@ -4,11 +4,13 @@ import { useAccountStore } from '@/stores/account';
 import { useGlobalErrorStore } from '@/stores/global-error';
 
 axios.defaults.baseURL = `${import.meta.env.VITE_BASE_URL}/api/v1`;
+axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use( res => res, async err => {
     console.log('err: ', err);
     if(err.response) {
         const accountStore = useAccountStore();
+        console.log('err.response.status:', err.response.status)
         if(err.response.status === 401 && accountStore.isSigned) { //401에러인데 로그인이 되어 있는 상태라면
             try {
                 await reissue();
@@ -20,7 +22,7 @@ axios.interceptors.response.use( res => res, async err => {
         }
     } else {
         const globalErrorStore = useGlobalErrorStore();
-        globalErrorStore.setErrorMessage(err.response.data.message);
+        globalErrorStore.setErrorMessage(err.response?.data?.message);
     }
     return Promise.reject(err);
 });
