@@ -8,10 +8,11 @@ axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use( res => res, async err => {
     console.log('err: ', err);
+    console.log('err.response: ', err.response);
     if(err.response) {
         const accountStore = useAccountStore();
         console.log('err.response.status:', err.response.status)
-        if(err.response.status === 401 && accountStore.isSigned) { //401에러인데 로그인이 되어 있는 상태라면
+        if(err.response.status === 401 && accountStore.state.isSigned) { //401에러인데 로그인이 되어 있는 상태라면
             try {
                 await reissue();
 

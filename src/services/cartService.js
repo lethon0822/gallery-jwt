@@ -6,7 +6,7 @@ export const addItem = itemId => {
 }
 
 export const getItems = () => {
-    return axios.get(path);
+    return axios.get(path).catch(e => e.response);
 }
 
 export const removeItem = cartId => {
