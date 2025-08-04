@@ -10,18 +10,18 @@ export default defineConfig({
   //   outDir: 'D:/ParkDoheum/2025/2025-04-msa/backend/gallery/src/main/resources/static',
   //   emptyOutDir: true
   // },
-  server: {
-    proxy: {
-      '/pic': {
-        target: 'http://localhost:8989',
-        changeOrigin: true
-      },
-      '/api': {
-        target: 'http://localhost:8989',
-        changeOrigin: true
-      }
-    }
-  },
+  // server: {
+  //   proxy: {
+  //     '/pic': {
+  //       target: 'http://localhost:8080',
+  //       changeOrigin: true
+  //     },
+  //     '/api': {
+  //       target: 'http://localhost:8080',
+  //       changeOrigin: true
+  //     }
+  //   }
+  // },
   plugins: [
     vue(),
     vueDevTools(),

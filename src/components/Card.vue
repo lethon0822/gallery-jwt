@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 
 const baseUrl = ref(import.meta.env.VITE_BASE_URL);
 
-const account = useAccountStore();
+const accountStore = useAccountStore();
 const router = useRouter();
 
 const props = defineProps({
@@ -21,11 +21,7 @@ const props = defineProps({
 //const computedItemDiscountPrice = computed(() => (props.item.price - (props.item.price * props.item.discountPer / 100)).toLocaleString() + '원');
 const computedItemDiscountPrice = computed(() => (props.item.price * ((100 - props.item.discountPer) * 0.01)).toLocaleString() + '원');
 
-const put = async () => {
-    if(!account.state.loggedIn) {
-        alert('로그인 해주세요.');
-        return;
-    }
+const put = async () => {   
     const res = await addItem( props.item.id );
     if(res === undefined) { 
         alert('서버에 문제가 있습니다.');
@@ -43,11 +39,13 @@ const put = async () => {
 </script>
 
 <template>
-    <router-link to="/detail">
+    
         <div class="card shadow-sm">
             <!-- 상품 사진 aria-label은 영역에 대한 설명 -->
-            <span class="img" :style="{backgroundImage: `url(${baseUrl}/pic/item/${props.item.id}/${props.item.imgPath})`}" 
-                            :aria-label="`상품사진(${props.item.name})`"></span>                           
+            <router-link to="/detail">
+                <span class="img" :style="{backgroundImage: `url(${baseUrl}/pic/item/${props.item.id}/${props.item.imgPath})`}" 
+                                :aria-label="`상품사진(${props.item.name})`"></span>                           
+            </router-link>
             <div class="card-body">
                 <p class="card-text">
                     <!-- 상품 이름 -->
@@ -63,8 +61,7 @@ const put = async () => {
                     <small class="real text-danger">{{ computedItemDiscountPrice }}</small>
                 </div>
             </div>
-        </div>
-    </router-link>
+        </div>    
 </template>
 
 <style lang="scss" scoped>
