@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { reissue } from './accountService';
+import { reissue } from '@/services/accountService';
 import { useAccountStore } from '@/stores/account';
 import { useGlobalErrorStore } from '@/stores/global-error';
 
@@ -18,6 +18,9 @@ axios.interceptors.response.use( res => res, async err => {
                 accountStore.logout();
             }
         }
+    } else {
+        const globalErrorStore = useGlobalErrorStore();
+        globalErrorStore.setErrorMessage(err.response.data.message);
     }
     return Promise.reject(err);
 });
