@@ -37,7 +37,7 @@ const put = async () => {
         <div class="card shadow-sm">
             <!-- 상품 사진 aria-label은 영역에 대한 설명 -->
             <router-link to="/detail">
-                <span class="img" :style="{backgroundImage: `url(${baseUrl}/pic/item/${props.item.id}/${props.item.imgPath})`}" 
+                <span class="img" :style="{backgroundImage: `url(${baseUrl}/pic/item/${props.item.imgPath})`}" 
                                 :aria-label="`상품사진(${props.item.name})`"></span>                           
             </router-link>
             <div class="card-body">
